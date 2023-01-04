@@ -70,8 +70,14 @@ function logic() {
   ball.y += ball.speed * Math.cos(ball.direction * Math.PI / 180);
   if (ball.y > P2YPos) {
     P2YPos += 8;
+    if (ball.y < P2YPos) {
+      P2YPos = ball.y;
+    }
   } else if (ball.y < P2YPos) {
     P2YPos -= 8;
+    if (ball.y > P2YPos) {
+      P2YPos = ball.y;
+    }
   }
   if (ball.x < -512) {
     ball = {
