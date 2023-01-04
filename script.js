@@ -16,7 +16,7 @@ function drawScreen() {
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.strokeStyle = 'white';
   context.lineWidth = 5;
-  context.strokeRect(0, 0, canvas.width, canvas.height);//for white background
+  context.strokeRect(0, 0, canvas.width, canvas.height); // for BLACK background
   context.beginPath();
   context.setLineDash([9, 15]);
   context.moveTo(512, 0);
