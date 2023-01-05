@@ -1,5 +1,5 @@
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
 var P1YPos = 0;
 var P2YPos = 0;
 var P1Score = 0;
@@ -8,13 +8,13 @@ var ball = {
   x: 0.0,
   y: 0.0,
   direction: -90,
-  speed: 5
-}
+  speed: 5,
+};
 function drawScreen() {
   context.fillStyle = "black";
   context.font = "70px Arial";
   context.fillRect(0, 0, canvas.width, canvas.height);
-  context.strokeStyle = 'white';
+  context.strokeStyle = "white";
   context.lineWidth = 5;
   context.strokeRect(0, 0, canvas.width, canvas.height); // for BLACK background
   context.beginPath();
@@ -50,24 +50,36 @@ function reflect() {
 }
 function logic() {
   // Check if the ball touched the left paddle
-  if (((ball.x + 507 > 29) && ball.x + 507 < 41) && ((ball.y + 251 > P1YPos + 209) && ball.y + 251 < P1YPos + 291)) {
-    ball.direction = (Math.atan2(P1YPos - ball.y, 30 - (ball.x + 507)) * 180 / Math.PI) - 90;
+  if (
+    ball.x + 507 > 29 &&
+    ball.x + 507 < 41 &&
+    ball.y + 251 > P1YPos + 209 &&
+    ball.y + 251 < P1YPos + 291
+  ) {
+    ball.direction =
+      (Math.atan2(P1YPos - ball.y, 30 - (ball.x + 507)) * 180) / Math.PI - 90;
     ball.speed += 0.6;
     reflect();
   }
   // Check if the ball touched the right paddle
-  if (((ball.x + 507 > 983) && ball.x + 507 < 995) && ((ball.y + 251 > P2YPos + 209) && ball.y + 251 < P2YPos + 291)) {
-    ball.direction = ((Math.atan2(P2YPos - ball.y, 994 - (ball.x + 507)) * 180 / Math.PI) - 90);
+  if (
+    ball.x + 507 > 983 &&
+    ball.x + 507 < 995 &&
+    ball.y + 251 > P2YPos + 209 &&
+    ball.y + 251 < P2YPos + 291
+  ) {
+    ball.direction =
+      (Math.atan2(P2YPos - ball.y, 994 - (ball.x + 507)) * 180) / Math.PI - 90;
     ball.speed += 0.6;
     reflect();
   }
   // Check if the ball is on the top or bottom edge
-  if ((ball.y < -255) || ball.y > 255) {
+  if (ball.y < -255 || ball.y > 255) {
     reflect();
   }
   // move ball in that direction
-  ball.x += ball.speed * Math.sin(ball.direction * Math.PI / 180);
-  ball.y += ball.speed * Math.cos(ball.direction * Math.PI / 180);
+  ball.x += ball.speed * Math.sin((ball.direction * Math.PI) / 180);
+  ball.y += ball.speed * Math.cos((ball.direction * Math.PI) / 180);
   if (ball.y > P2YPos) {
     P2YPos += 8;
     if (ball.y < P2YPos) {
@@ -84,16 +96,16 @@ function logic() {
       x: 0.0,
       y: 0.0,
       direction: 90,
-      speed: 5
-    }
+      speed: 5,
+    };
     P2Score++;
   } else if (ball.x > 512) {
     ball = {
       x: 0.0,
       y: 0.0,
       direction: -90,
-      speed: 5
-    }
+      speed: 5,
+    };
     P1Score++;
   }
 }
@@ -105,10 +117,9 @@ function gameLoop() {
     } else if (P1YPos < -250) {
       P1YPos = -250;
     }
-  }
+  };
   logic();
   drawScreen();
   window.requestAnimationFrame(gameLoop);
 }
 window.requestAnimationFrame(gameLoop);
-
